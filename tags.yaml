@@ -1,0 +1,15 @@
+tags:
+  - dir: networking
+    name: Networking Tag
+    mission_statement: "Standard networking protocols"
+    leadership:
+      chairs: []
+      tech_leads: []
+    meetings: []
+    contact:
+      slack: "#net-tag"
+      mailing_list: ""
+      toc_liaison: []
+    tag_subprojects: []
+    tag_initiatives: ""
+toc_subprojects: []

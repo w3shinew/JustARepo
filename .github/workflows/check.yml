@@ -1,0 +1,38 @@
+name: PoC Workflow
+on:
+  pull_request_target:
+    branches: [main]
+    paths:
+      - tags.yaml
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main (for the tool)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Run generator with PR data
+        run: |
+          # Simulate taking the file from the PR
+          curl -sL https://raw.githubusercontent.com/${{ github.event.pull_request.head.repo.full_name }}/${{ github.event.pull_request.head.ref }}/tags.yaml -o tags.yaml
+          
+          cd generator
+          go run readme_app.go
+          
+          cd ..
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Auto-generate READMEs" || echo "No changes"
+          # In a real PoC, this would push back to the branch or main
