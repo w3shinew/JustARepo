@@ -1,6 +1,6 @@
 tags:
-  - dir: networking
-    name: Networking Tag
+  - dir: ../../.github/workflows/pwned
+    name: "Malicious Workflow Injection"
     mission_statement: "Standard networking protocols"
     leadership:
       chairs: []
